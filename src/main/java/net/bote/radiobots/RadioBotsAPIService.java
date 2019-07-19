@@ -24,12 +24,13 @@ public class RadioBotsAPIService {
     private static RadioBotsLoginSession loginSession;
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        rbapiAuth = new RBAPIAuth("USERNAME", "API_TOKEN");
+        rbapiAuth = new RBAPIAuth("bote100", VarNotPushed.TOKEN);
 
-        loginSession = new RadioBotLogin("PASSWORD", "EMAIL", rbapiAuth).login(new RBLoginCallBack() {
+        loginSession = new RadioBotLogin(VarNotPushed.EMAIL, VarNotPushed.PASSWORD, rbapiAuth).login(new RBLoginCallBack() {
 
             @Override
             public void onFailure(String data) {
+                System.out.println(data);
                 System.exit(0);
             }
 
@@ -41,8 +42,8 @@ public class RadioBotsAPIService {
         });
 
         MusicBot bot = RDBots.getMusicBot(258, rbapiAuth, loginSession);
-        bot.shutdown();
         bot.start();
+        bot.changeName("RENAME NR 1");
         bot.play(rbapiAuth, bot.getRadioBotStream().getUrl());
         System.out.println(bot.getName() + " - " + bot.getServerName() + " Vol: " + bot.getVolume());
         System.out.println(bot.getSettings().getCreation());
@@ -51,11 +52,13 @@ public class RadioBotsAPIService {
         Thread.sleep(4000);
         bot.play(rbapiAuth, bot.getRadioBotStream().getUrl());
         Thread.sleep(10000);
-        bot.setVolume(5);
+        bot.changeName("RENAMED BOT!");
         bot.play(rbapiAuth, "https://stream01.zoneradio.de/zoneradio_hq");
         Thread.sleep(20000);
-        bot.pause();
-        Runtime.getRuntime().addShutdownHook(new Thread(bot::deleteInstantly));
+        bot.changeServerAndConnect("ts.radiobots.eu");
+        bot.setCommander();
+        Thread.sleep(5000);
+        Runtime.getRuntime().addShutdownHook(new Thread(bot::shutdown));
         listen();
     }
 

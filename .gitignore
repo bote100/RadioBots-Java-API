@@ -40,3 +40,4 @@ hs_err_pid*
 .idea/
 Radiobots Java API.iml
 src/test/
+src/main/net/bote/radiobots/NotPushedClass.class

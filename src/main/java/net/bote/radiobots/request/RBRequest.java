@@ -1,5 +1,7 @@
 package net.bote.radiobots.request;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.bote.radiobots.bots.enums.RadioBotType;
 import net.bote.radiobots.exception.MissingAPIParameterException;
 import net.bote.radiobots.exception.RadioBotsException;
@@ -26,6 +28,10 @@ import java.util.Map;
 
 public class RBRequest {
 
+    @Getter
+    @Setter
+    public static boolean developerMode = false;
+
     public static JSONObject request(RadioBotType type, String service, Map<String, String> params, RBAPIAuth auth) throws IOException {
 
         HttpGet httpGet = new HttpGet("https://api.radiobots.eu/v3/" + type.toString().toLowerCase() + "/bot/" + service + ".php");
@@ -50,7 +56,7 @@ public class RBRequest {
 
         if(responseBody.charAt(0) != '{') return null;
 
-        System.out.println(responseBody);
+        if(developerMode) System.out.println(responseBody);
 
         try {
             JSONObject jsonObject = new JSONObject(responseBody);
@@ -65,6 +71,7 @@ public class RBRequest {
                     if(data.contains("You have reached your daily Quota")) throw new RadioBotsException(data);
                     else if(data.contains("Empty field")) throw new MissingAPIParameterException(data);
                     else if(data.contains("Bot already online")) throw new RadioBotsException(data);
+                    else if(data.contains("Server down")) throw new RadioBotsException("The RadioBots-Software on the selected server is currently down...");
                 }
 
             client.close();

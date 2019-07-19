@@ -2,6 +2,7 @@ package net.bote.radiobots.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import net.bote.radiobots.bots.RadioBot;
 
 /**
@@ -13,17 +14,13 @@ import net.bote.radiobots.bots.RadioBot;
 @Getter
 public class RadioBotStream {
 
+    @Setter
     private String url;
     private String position;
     private String lenght;
     private boolean paused;
     private boolean playing;
     private RadioBot bot;
-
-    public void resume() {
-        bot.seek(this.position);
-        bot.play(bot.getAuth(), this.url);
-    }
 
     public void pause() {
         this.bot.pause();

@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.ToString;
 import net.bote.radiobots.bots.RadioBot;
 import net.bote.radiobots.bots.enums.RadioBotType;
-import net.bote.radiobots.exception.RadioBotsException;
 import net.bote.radiobots.login.RadioBotsLoginSession;
 import net.bote.radiobots.request.BotSettings;
 import net.bote.radiobots.request.RBRequest;
@@ -157,6 +156,38 @@ public class MusicBot implements RadioBot {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void changeName(String newName) {
+        try {
+            RBRequest.request(RadioBotType.TEAMSPEAK, "change-settings", MapBuilder.buildStringMap(
+                    new MapPair("id", this.uuid),
+                    new MapPair("name", newName)
+            ) , this.authentication);
+            this.name = newName;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void changeServerName(String newServerName) {
+        try {
+            RBRequest.request(RadioBotType.TEAMSPEAK, "change-settings", MapBuilder.buildStringMap(
+                    new MapPair("id", this.uuid),
+                    new MapPair("ip", newServerName)
+            ) , this.authentication);
+            this.host = newServerName;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void changeServerAndConnect(String newServerName) {
+        boolean isPlaying = getRadioBotStream().isPlaying();
+        changeServerName(newServerName);
+        shutdown();
+        start();
+        if(isPlaying) play(authentication, getRadioBotStream().getUrl());
     }
 
     public boolean setCommander() {

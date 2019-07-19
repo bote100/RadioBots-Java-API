@@ -28,8 +28,8 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class RadioBotLogin {
 
-    private final String password;
     private final String email;
+    private final String password;
     private final RBAPIAuth rbapiAuth;
 
     public RadioBotsLoginSession login(RBLoginCallBack loginCallBack) throws IOException {
