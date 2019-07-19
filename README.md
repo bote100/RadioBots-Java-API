@@ -12,8 +12,25 @@ music bots** and using other functions of the RadioBots-REST-API (as example a l
 
 Maven:
 ```xml
-Coming soon!
+        <repository>
+            <id>mvn-repo</id>
+            <url>https://rawgit.com/bote100/RadioBots-Java-API/master</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        
+        <dependency>
+            <groupId>net.bote</groupId>
+            <artifactId>radiobotsapi</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 ```
+
+Or [download RadioBots Java API jar file](https://workupload.com/file/nssDpG96) from workuplaod.com.
 
 ### Documentation
 
