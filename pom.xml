@@ -47,6 +47,26 @@
             <version>20180813</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.bote</groupId>
+            <artifactId>radiobotsapi</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
+
+    <repositories>
+
+        <repository>
+            <id>mvn-repo</id>
+            <url>https://github.com/bote100/RadioBots-Java-API</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 </project>
