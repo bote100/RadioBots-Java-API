@@ -48,7 +48,7 @@ public class MusicBot implements RadioBot {
         this.authentication = auth;
         this.loginSession = session;
 
-        refreshValues();
+        refreshAll();
     }
 
     public RadioBotType getRadioBotType() {
@@ -258,7 +258,6 @@ public class MusicBot implements RadioBot {
 
     @Override
     public RadioBotStream getRadioBotStream() {
-        refreshStream();
         return this.musicStream;
     }
 

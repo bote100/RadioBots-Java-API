@@ -8,6 +8,13 @@ import net.bote.radiobots.request.RBRequest;
 import net.bote.radiobots.util.MapBuilder;
 import net.bote.radiobots.util.MapPair;
 import net.bote.radiobots.util.RBAPIAuth;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -42,6 +49,26 @@ public class RDBots {
         if(!callback.getBoolean("success")) throw new RuntimeException(callback.getString("data"));
 
         return getMusicBot(callback.getInt("id"), auth, session);
+    }
+
+    public static String getMusicTitle(String url) {
+        HttpGet httpGet = new HttpGet("https://3.radiobots.eu/php/bots/ts3.php?action=titledata&url=" + url);
+
+        CloseableHttpClient client = HttpClientBuilder.create().setUserAgent("PostmanRuntime/7.15.0").build();
+
+        ResponseHandler<String> responseHandler = response -> {
+            int status = response.getStatusLine().getStatusCode();
+            if (status >= 200 && status < 300) {
+                HttpEntity entity = response.getEntity();
+                return entity != null ? EntityUtils.toString(entity) : null;
+            } else throw new ClientProtocolException("Unexpected response status: " + status);
+        };
+        try {
+            return client.execute(httpGet, responseHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return url;
     }
 
 }

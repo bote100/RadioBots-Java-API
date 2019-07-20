@@ -56,8 +56,8 @@ public class LoginToAccount {
         //
         // If the login is successful, the functions contains a session object. This class contains all values of
         // the login process.
-        loginSession = new RadioBotLogin("PASSWORD", "EMAIL", rbapiAuth).login(new RBLoginCallBack() {
 
+        loginSession = new RadioBotLogin("EMAIL", "PASSWORD", rbapiAuth).login(new RBLoginCallBack() {
             @Override
             public void onFailure(String data) {
                 System.exit(0);
