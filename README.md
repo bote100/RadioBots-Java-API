@@ -30,7 +30,7 @@ Maven:
         </dependency>
 ```
 
-Or [download RadioBots Java API jar file](https://workupload.com/file/nssDpG96) from workuplaod.com.
+Or [download RadioBots Java API jar file](https://workupload.com/file/UGQUzgym) from workuplaod.com.
 
 ### Documentation
 
