@@ -60,7 +60,6 @@ public class MusicBot implements RadioBot {
     }
 
     public String getName() {
-        refreshValues();
         return this.name;
     }
 
@@ -70,7 +69,6 @@ public class MusicBot implements RadioBot {
     }
 
     public int getVolume() {
-        refreshValues();
         return this.vol;
     }
 
@@ -251,12 +249,10 @@ public class MusicBot implements RadioBot {
     }
 
     public boolean isRunning() {
-        refreshValues();
         return this.online;
     }
 
     public boolean isOwn() {
-        refreshValues();
         return this.success;
     }
 
