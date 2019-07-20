@@ -1,6 +1,6 @@
 # RadioBots Java API
 
-RadioBots one of the popular free teamspeak music bots hoster. With this API you have access to **create and manage own 
+RadioBots is one of the popular free teamspeak music bots hoster. With this API you have access to **create and manage own 
 music bots** and using other functions of the RadioBots-REST-API (as example a login checker) **with using java**.
 
 ### Goals
@@ -26,7 +26,7 @@ Maven:
         <dependency>
             <groupId>net.bote</groupId>
             <artifactId>radiobotsapi</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.1-SNAPSHOT</version>
         </dependency>
 ```
 
