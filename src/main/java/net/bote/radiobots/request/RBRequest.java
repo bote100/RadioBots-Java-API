@@ -72,6 +72,8 @@ public class RBRequest {
                     else if(data.contains("Empty field")) throw new MissingAPIParameterException(data);
                     else if(data.contains("Bot already online")) throw new RadioBotsException(data);
                     else if(data.contains("Server down")) throw new RadioBotsException("The RadioBots-Software on the selected server is currently down...");
+                    else if(data.contains("authentication failed")) throw new RadioBotsException(data);
+
                 }
 
             client.close();
