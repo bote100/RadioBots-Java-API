@@ -28,12 +28,11 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class RadioBotLogin {
 
-    private final String email;
     private final String password;
     private final RBAPIAuth rbapiAuth;
 
     public RadioBotsLoginSession login(RBLoginCallBack loginCallBack) throws IOException {
-        JSONObject jsonObject = requestData(MapBuilder.buildStringMap(new MapPair("mail", this.email), new MapPair("password", this.password)), this.rbapiAuth);
+        JSONObject jsonObject = requestData(MapBuilder.buildStringMap(new MapPair("mail", this.rbapiAuth.getUser()), new MapPair("password", this.password)), this.rbapiAuth);
 
         if(!Objects.requireNonNull(jsonObject).getBoolean("success")) {
             loginCallBack.onFailure(jsonObject.getString("data"));
@@ -44,6 +43,10 @@ public class RadioBotLogin {
         loginCallBack.onSuccess(session);
 
         return session;
+    }
+
+    public String getEmail() {
+        return rbapiAuth.getUser();
     }
 
     private JSONObject requestData(Map<String, String> params, RBAPIAuth auth) throws IOException {
